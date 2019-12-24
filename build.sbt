@@ -5,7 +5,7 @@ version := "0.1"
 scalaVersion := "2.11.0"
 
 // https://mvnrepository.com/artifact/org.apache.spark/spark-core
-libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.0"
+//libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.0"
 
 // https://mvnrepository.com/artifact/org.json4s/json4s-native
 libraryDependencies += "org.json4s" %% "json4s-native" % "3.6.7"

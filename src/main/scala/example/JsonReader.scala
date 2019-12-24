@@ -8,23 +8,20 @@ import org.json4s.native.JsonMethods
 object JsonReader extends App {
 
   case class User(
-                   id: Int,
-                   country: String,
-                   points: Int,
-                   //price: Int,
-                   title: String,
-                   variety: String,
-                   winery: String
+                   id:      Option[Int],
+                   country: Option[String],
+                   points:  Option[Int],
+                   price:   Option[Int],
+                   title:   Option[String],
+                   variety: Option[String],
+                   winery:  Option[String]
                  )
-  implicit val jsonDefaultFormats = DefaultFormats;
+  implicit val jsonDefaultFormats: DefaultFormats.type = DefaultFormats
 
-  val spark = SparkSession.builder().appName("ConvertJsonToScalaCaseClass").master("local").getOrCreate();
-  val sc = spark.sparkContext;
-  val json = sc.textFile(args(0));
+  val spark = SparkSession.builder().appName("ConvertJsonToScalaCaseClass").master("local").getOrCreate()
+  val sc = spark.sparkContext
+  val json = sc.textFile(args(0))
 
+  json.foreach(element => println(JsonMethods.parse(element).extract[User]))
 
-  for(element<-json.collect().toList)
-  {
-    println(JsonMethods.parse(element).extract[User]);
-  }
 }
